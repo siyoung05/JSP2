@@ -66,7 +66,7 @@ function checkValue() {
 #### index화면으로 넘어가면서 member_tbl_02 테이블에 데이터 추가
 
 
-## 사용한 테이블 / 테이블에 
+### 사용한 테이블 / 테이블에 넣어준 값
 ```sql
 CREATE TABLE member_tbl_02 (
 	custno number(6) NOT NULL PRIMARY KEY,
