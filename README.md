@@ -62,8 +62,8 @@ function checkValue() {
 ![image](https://user-images.githubusercontent.com/93521099/186086260-2d62c995-d27d-49fe-9763-2c43b8109c94.png)
 ![image](https://user-images.githubusercontent.com/93521099/186086562-f622e0bc-1b31-482b-920b-0d61a31f02f8.png)
 
-#### 모든칸에 입력 한 후 등록 버튼을 누르면 index화면으로 넘어감.
-#### index화면으로 넘어가면서 member_tbl_02 테이블에 데이터 추가
+#### 모든칸에 입력 한 후 등록 버튼을 누르게되면 join_p.jsp파일이 실행됨.
+#### join_p.jsp파일 내에 코드 실행이  member_tbl_02 테이블에 데이터가 추가되면고 모든 작업을 마친 후 index.jsp파일로 화면이 넘어감.
 
 
 ### 사용한 테이블 / 테이블에 넣어준 값
