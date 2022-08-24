@@ -12,7 +12,7 @@
 
   Connection conn = DBConnect.getConnection(); // DB 연결
   PreparedStatement pstmt = conn.prepareStatement(sql);
-  ResultSet rs = pstmt.executeQuery(); // sql문을 실행하여 마지막 번호을 검색하여 변수 rs에 저장
+  ResultSet rs = pstmt.executeQuery(); // Query문 실행하여 마지막 번호을 검색하여 변수 rs에 저장
 
   rs.next();
   int num = rs.getInt(1) + 1; // 마지막 번호에서 1을 더함
