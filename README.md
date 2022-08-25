@@ -59,7 +59,7 @@ function checkValue() {
 #### alert를 이용하여 메세지창을 띄워줌.
 
 ![image](https://user-images.githubusercontent.com/93521099/186086062-c0e4608d-eb32-4cc7-8701-d7da498986f2.png)
-![image](https://user-images.githubusercontent.com/93521099/186086260-2d62c995-d27d-49fe-9763-2c43b8109c94.png)
+![image](https://user-images.githubusercontent.com/93521099/186558643-ee788304-1a30-4547-a17c-f616f73534e5.png)
 ![image](https://user-images.githubusercontent.com/93521099/186086562-f622e0bc-1b31-482b-920b-0d61a31f02f8.png)
 
 #### 모든칸에 입력 한 후 등록 버튼을 누르게되면 join_p.jsp파일이 실행됨.
@@ -109,3 +109,57 @@ insert into member_tbl_02 values(10006, '차공단', '010-1111-7777', '제주도
 ```
 #### custno는 데이터형이 number이기 때문에 Int형으로 지정 나머지 컬럼들은 varchar2, char, date이기 때문에 String으로 지정
 #### 회원등록 페이지에서 입력칸에 name을 지정하여 지정한 name을 이용하여 입력한 값을 컬럼 순서에 맞게 데이터를 넣어줌.
+
+## 회원목록조회 페이지
+### 실행 페이지
+![image](https://user-images.githubusercontent.com/93521099/186558854-7063b53b-7bf3-4771-b1ab-b34f9c5fb274.png)
+
+### 코드 
+```jsp
+<%
+	String sql = "select custno, custname, phone, address, " // Query문 작성 후 sql에 저장
+		     + "to_char(joindate, 'yyyy-mm-dd') joindate," 
+		     + "case when grade = 'A' then 'VIP' when grade = 'B' then '일반' else '직원' end grade, "
+		     + "city from member_tbl_02 order by custno asc";
+				
+	Connection conn = DBConnect.getConnection(); 
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	ResultSet rs = pstmt.executeQuery(); // Query문을 실행하여 그 값을 rs변수에 저장
+%>
+```
+
+```html
+<section class="section">
+	<h2>홈쇼핑 회원 명단</h2><br>
+		<table class="table_line">
+			<tr>
+				<th>회원번호</th>
+				<th>회원성명</th>
+				<th>전화번호</th>
+				<th>주소</th>
+				<th>가입일지</th>
+				<th>고객등급</th>
+				<th>거주지역</th>
+			</tr>
+		<% while (rs.next()) { // rs에 값이 있을 경우 실행 %> 
+			<tr class="center">
+				<td> <%=rs.getString("custno") %> </td>
+				<td> <%=rs.getString("custname") %> </td>
+				<td> <%=rs.getString("phone") %> </td>
+				<td> <%=rs.getString("address") %> </td>
+				<td> <%=rs.getString("joindate") %> </td>
+				<td> <%=rs.getString("grade") %> </td>
+				<td> <%=rs.getString("city") %> </td>
+				<td>
+					<input type="button" value="수정">
+					<input type="button" value="삭제">
+				</td>
+			</tr>
+		<% } %>
+	</table>	
+</section>
+```
+#### 회원목록을 조회하기 위해 테이블을 먼저 생성을 해줌
+#### tr,th를 이용하여 제목줄을 만들어준 후 while문을 이용하여 데이터를 추가해줌
+#### while문이 실행 될 때 rs변수가 가지고있는 값만큼 실행되며, tr로 줄 생성을 한다음 td를 이용하여 rs에 들어있는 값을 넣어줌
+#### rs변수에 값을 받을 때 String형으로 받기 때문에 getString을 사용하여 값을 넣어줌
